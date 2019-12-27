@@ -19,6 +19,10 @@
     'license': 'AGPL-3',
     'data': [
         'views/report_delivery_document.xml',
+        'views/report_delivery_document_without_price.xml',
+        'views/external_layout_clean.xml',
+        'views/report_saleorder_document.xml',
+        'views/report_invoice_document.xml',
     ],
     'demo': [],
     'installable': True,

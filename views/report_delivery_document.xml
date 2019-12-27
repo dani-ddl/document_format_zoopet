@@ -2,16 +2,11 @@
 <odoo>
     <data>
 
-        <template id="report_delivery_document_ch" inherit_id="stock.report_delivery_document">
-
-            <xpath expr="/t/t/t/t/t[@t-set='address']" position="replace">
-
-                <div></div>
-
-
-            </xpath>
+        <template id="report_delivery_document_zoopet" inherit_id="stock.report_delivery_document">
 
             <xpath expr="//div[@class='page']" position="replace">
+
+                <t t-set="isAlbaran" t-value="o.move_line_ids"></t>
 
                  <!-- Datos documento -->
               <div style="width:70%;padding-bottom:30px;margin-top:-150px;margin:0px auto;display:none;">
@@ -172,22 +167,22 @@
           <!-- datos documento -->
             <div style="width:49%;clear:both;float:left;margin-right:1%;margin-top:5px;font-size:0.9em;">
               <div style="width:50%;float:left;border:2px solid black;height:25px;">
-                <span style="margin-left:2px;"><strong>Nª Albaran:</strong></span><span t-field="o.name"/>
+                <span style="margin-left:2px;"><b>Nª Albaran:</b></span><span t-field="o.name"/>
               </div>
               <div style="width:50%;float:left;border-bottom:2px solid black;border-right:2px solid black;border-top:2px solid black;height:25px;">
-               <span style="margin-left:2px;"><strong>Fecha:</strong></span><span t-field="o.date_done" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/>
+               <span style="margin-left:2px;"><b>Fecha:</b></span><span t-field="o.date_done" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/>
               </div>
               <div style="width:50%;float:left;border-bottom:2px solid black;border-left:2px solid black;border-right:2px solid black;color:white;height:25px;">
-                <span style="margin-left:2px;"><strong>Cliente:</strong></span><span/>
+                <span style="margin-left:2px;"><b>Cliente:</b></span><span/>
               </div>
               <div style="width:50%;float:left;border-bottom:2px solid black;border-right:2px solid black;height:25px;">
-               <span style="margin-left:2px;"><strong>Pedido:</strong></span><span t-field="o.origin"/>
+               <span style="margin-left:2px;"><b>Pedido:</b></span><span t-field="o.origin"/>
               </div>
             </div>
           <!-- fin datos documento -->
           <!-- observaciones -->
             <div style="width:49%;float:left;margin-left:1%;border:2px solid black;height:51px;margin-top:5px;">
-              <span style="margin-left:2px;"><strong>Observaciones:</strong></span><span t-field="o.note"/>
+              <span style="margin-left:2px;"><b>Observaciones:</b></span><span t-field="o.note"/>
             </div>
           <!-- fin observaciones -->
       <!-- Fin datos documento -->
@@ -259,14 +254,11 @@
                           <div style="height:14px; width:122px; display:block; float:left; margin-left:-15px;font-size:1.2em;">
                             <span>Código</span>
                           </div>
-                          <div style="height:14px; width:244px; display:block;float:left;font-size:1.2em;">
+                          <div style="height:14px; width:279px; display:block;float:left;font-size:1.2em;">
                             <span>Descripción</span>
                           </div>
                           <div style="height:14px; width:55px;  display:block; float:left;font-size:1.2em;text-align:right;">
                             <span>IVA%</span>
-                          </div>
-                           <div style="height:14px; width:55px;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>R.E.%</span>
                           </div>
                           <div style="height:14px; width:84px;  display:block; float:left;font-size:1.2em;text-align:right;">
                             <span>Unidades</span>
@@ -280,7 +272,7 @@
                            <div style="height:14px; width:55px;  display:block; float:left;font-size:1.2em;text-align:right;">
                             <span>DTO2.</span>
                           </div>
-                           <div style="height:14px; width:64px;  display:block; float:left;font-size:1.2em;text-align:right;">
+                           <div style="height:14px; width:54px;  display:block; float:left;font-size:1.2em;text-align:right;">
                             <span>Neto</span>
                           </div>
                           <div style="height:14px; width:64px;  display:block; float:left;font-size:1.2em;text-align:right;">
@@ -318,7 +310,7 @@
                                 </div>
                              <!-- Fin codigo -->
                              <!-- Descripcion -->
-                                <div style="width:244px; display:block;float:left;">
+                                <div style="width:279px; display:block;float:left;">
                                     <span t-field="move_line.product_id.name"/>
                                     <p t-if="o.picking_type_code == 'outgoing'">
                                         <span t-field="move_line.product_id.sudo().description_pickingout"/>
@@ -352,31 +344,6 @@
 
                                 </div>
                               <!-- Fin % de IVA -->
-
-                               <!-- % de RE -->
-                                <div t-if="move_line.move_id.sale_line_id.tax_id" style="width:55px;  display:block; float:left;text-align:right;">
-                                    <t t-set="recLin" t-value="0"></t>
-                                    <t t-foreach="move_line.move_id.sale_line_id.tax_id" t-as="tax">
-                                      <t t-set="tax_name" t-value="tax.name"></t>
-                                      <t t-set="isREQ" t-value="tax_name.find('Recargo')"></t>
-                                     <t t-if="isREQ > -1">
-                                        <t t-set="recLin" t-value="'%.2f'%tax.amount"></t>
-                                      </t>
-                                      <t t-else="">
-
-                                      </t>
-
-                                  </t>
-                                  <t t-if="recLin != 0">
-                                    <span t-esc="recLin"></span>
-                                  </t>
-                                  <t t-else="">
-                                    <span style="color:white;">aaa</span>
-                                  </t>
-
-                                </div>
-                              <!-- Fin % de RE -->
-
 
                               <!-- Cantidad entregada -->
                                 <div style="width:84px;  display:block; float:left;text-align:right">
@@ -414,7 +381,7 @@
                               <!-- Fin descuento2 -->
 
                               <!-- Precio Neto / u -->
-                                <div style="width:64px;  display:block; float:left;text-align:right;">
+                                <div style="width:54px;  display:block; float:left;text-align:right;">
                                      <span t-esc="'%.2f'%move_line.move_id.sale_line_id.price_reduce"/>€
                                 </div>
                               <!-- Fin precio neto / u -->
@@ -499,7 +466,7 @@
                                         </t>
                                         <t t-if="tax.amount == 5.2">
                                             <t t-set="importeRec52"
-                                               t-value="importeRec52 +((total_linea + importeIva21)*0.052)"></t>
+                                               t-value="importeRec52 + total_linea *0.052"></t>
                                         </t>
 
                                         <t t-if="tax.amount == 10.0">
@@ -511,7 +478,7 @@
 
                                          <t t-if="tax.amount == 1.4">
                                             <t t-set="importeRec14"
-                                               t-value="importeRec14 +((total_linea + importeIva10)*0.014)"></t>
+                                               t-value="importeRec14 +total_linea *0.014"></t>
                                         </t>
 
                                         <t t-if="tax.amount == 4.0">
@@ -523,7 +490,7 @@
 
                                         <t t-if="tax.amount == 0.50">
                                             <t t-set="importeRec05"
-                                               t-value="importeRec05 +((total_linea + importeIva4Total)*0.005)"></t>
+                                               t-value="importeRec05 +total_linea *0.005"></t>
                                         </t>
 
 
@@ -619,40 +586,72 @@
                 <!-- desgloses IVA y RECARAGO -->
                  <div style="border: 2px solid black;height:104px;">
                      <!-- Cabecera-->
-                     <div style="width:16%;border-right:2px solid black;border-bottom:2px solid black;text-align:center;float:left;height:25px;">
-                        <span>Total Importe</span>
+                     <div style="width:9%;border-right:2px solid black;border-bottom:2px solid black;text-align:center;float:left;height:25px;">
+                        <span>Total </span>
                      </div>
 
-                     <div style="width:16%;border-right:2px solid black;border-bottom:2px solid black;text-align:center;float:left;height:25px;">
+                     <div style="width:9%;border-right:2px solid black;border-bottom:2px solid black;text-align:center;float:left;height:25px;">
+                        <span>Dto%</span>
+                     </div>
+
+                     <div style="width:9%;border-right:2px solid black;border-bottom:2px solid black;text-align:center;float:left;height:25px;">
+                        <span>Dpp%</span>
+                     </div>
+
+                     <div style="width:9%;border-right:2px solid black;border-bottom:2px solid black;text-align:center;float:left;height:25px;">
+                        <span>Imp. Dtos</span>
+                     </div>
+
+                      <div style="width:9%;border-right:2px solid black;border-bottom:2px solid black;text-align:center;float:left;height:25px;">
+                        <span>Portes</span>
+                     </div>
+
+                     <div style="width:9%;border-right:2px solid black;border-bottom:2px solid black;text-align:center;float:left;height:25px;">
                         <span>Base</span>
                      </div>
 
-                     <div style="width:10%;border-right:2px solid black;border-bottom:2px solid black;text-align:center;float:left;height:25px;">
+                     <div style="width:9%;border-right:2px solid black;border-bottom:2px solid black;text-align:center;float:left;height:25px;">
                         <span>% IVA</span>
                      </div>
 
-                     <div style="width:16%;border-right:2px solid black;border-bottom:2px solid black;text-align:center;float:left;height:25px;">
+                     <div style="width:9%;border-right:2px solid black;border-bottom:2px solid black;text-align:center;float:left;height:25px;">
                         <span>IVA</span>
                      </div>
 
-                      <div style="width:10%;border-right:2px solid black;border-bottom:2px solid black;text-align:center;float:left;height:25px;">
+                      <div style="width:9%;border-right:2px solid black;border-bottom:2px solid black;text-align:center;float:left;height:25px;">
                         <span>% R.E.</span>
                      </div>
 
-                     <div style="width:16%;border-right:2px solid black;border-bottom:2px solid black;text-align:center;float:left;height:25px;">
+                     <div style="width:9%;border-right:2px solid black;border-bottom:2px solid black;text-align:center;float:left;height:25px;">
                         <span>R.E.</span>
                      </div>
 
-                     <div style="width:16.5%;text-align:center;border-bottom:2px solid black;float:left;height:25px;">
-                        <span>Total Factura</span>
+                     <div style="width:10%;text-align:center;border-bottom:2px solid black;float:left;height:25px;">
+                        <span>Total</span>
                      </div>
 
                     <!-- Primera fila 21%IVA-->
-                    <div style="width:16%;border-right:2px solid black;text-align:center;float:left;height:25px;">
-                       <spam t-esc="'%.2f'%importeTotal"></spam>€
+                    <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                       <span t-esc="'%.2f'%importeIva21Total"></span>
                      </div>
 
-                     <div style="width:16%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                     <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                        <span>Dto%</span>
+                     </div>
+
+                     <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                        <span>Dpp%</span>
+                     </div>
+
+                     <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                        <span>Imp. Dtos</span>
+                     </div>
+
+                      <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                        <span style="color:white;">Portes</span>
+                     </div>
+
+                     <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
                          <t t-if="importeIva21 != 0">
                             <span t-esc="'%.2f'%importeIva21Total"></span>
                          </t>
@@ -661,7 +660,7 @@
                          </t>
                      </div>
 
-                     <div style="width:10%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                     <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
                         <t t-if="importeIva21 != 0">
                             <spam>21.00</spam>
                          </t>
@@ -670,7 +669,7 @@
                          </t>
                      </div>
 
-                     <div style="width:16%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                     <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
                          <t t-if="importeIva21 != 0">
                             <spam t-esc="'%.2f'%importeIva21"></spam>
                          </t>
@@ -679,7 +678,7 @@
                          </t>
                      </div>
 
-                      <div style="width:10%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                      <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
                          <t t-if="importeRec05 != 0">
                             <span>5.2</span>
                           </t>
@@ -688,7 +687,7 @@
                           </t>
                      </div>
 
-                     <div style="width:16%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                     <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
                          <t t-if="importeRec05 != 0">
                             <spam t-esc="'%.2f'%importeRec52"></spam>
                          </t>
@@ -697,17 +696,33 @@
                          </t>
                      </div>
 
-                     <div style="width:16%;text-align:center;float:left;height:25px;">
+                     <div style="width:10%;text-align:center;float:left;height:25px;">
                         <spam t-esc="'%.2f'%importeTotalImp"></spam>€
                      </div>
                     <!-- fin primera fila -->
 
                     <!-- segunda fila 10%IVA-->
-                    <div style="width:16%;border-right:2px solid black;text-align:center;float:left;height:25px;">
-                         <spam style="color:white;" t-esc="'%.2f'%importeTotal"></spam>
+                    <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                         <span t-esc="'%.2f'%importeIva10Total"></span>
                      </div>
 
-                     <div style="width:16%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                     <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                        <span>Dto%</span>
+                     </div>
+
+                     <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                        <span>Dpp%</span>
+                     </div>
+
+                     <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                        <span>Imp. Dtos</span>
+                     </div>
+
+                      <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                        <span style="color:white;">Portes</span>
+                     </div>
+
+                     <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
                          <t t-if="importeIva10 != 0">
                             <span t-esc="'%.2f'%importeIva10Total"></span>
                          </t>
@@ -716,7 +731,7 @@
                          </t>
                      </div>
 
-                     <div style="width:10%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                     <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
                          <t t-if="importeIva10 != 0">
                             <span>10.00</span>
                          </t>
@@ -725,7 +740,7 @@
                          </t>
                      </div>
 
-                     <div style="width:16%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                     <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
                         <t t-if="importeIva10 != 0">
                             <span t-esc="'%.2f'%importeIva10"></span>
                          </t>
@@ -734,7 +749,7 @@
                          </t>
                      </div>
 
-                      <div style="width:10%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                      <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
                         <t t-if="importeRec14 != 0">
                             <span>1.4</span>
                          </t>
@@ -743,7 +758,7 @@
                          </t>
                      </div>
 
-                     <div style="width:16%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                     <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
                          <t t-if="importeRec14 != 0">
                             <span t-esc="'%.2f'%importeRec14"></span>
                          </t>
@@ -752,17 +767,38 @@
                          </t>
                      </div>
 
-                     <div style="width:16%;text-align:center;float:left;height:25px;">
+                     <div style="width:10%;text-align:center;float:left;height:25px;">
                         <span style="color:white;">Total Factura</span>
                      </div>
                     <!-- fin segunda fila -->
 
                     <!-- tercera fila 4%IVA-->
-                    <div style="width:16%;border-right:2px solid black;text-align:center;float:left;height:25px;">
-                         <spam style="color:white;" t-esc="'%.2f'%importeTotal"></spam>
+                    <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                        <span t-esc="'%.2f'%importeIva4Total"></span>
                      </div>
 
-                     <div style="width:16%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                     <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                        <span>Dto%</span>
+                     </div>
+
+                     <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                        <span>Dpp%</span>
+                     </div>
+
+                     <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                        <span>Imp. Dtos</span>
+                     </div>
+
+                      <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                          <t t-if="o.carrier_id.fixed_price">
+                            <span t-esc="'%.2f'%o.carrier_id.fixed_price"></span>
+                          </t>
+                          <t t-else="">
+                              <span style="color:white;">PORTES</span>
+                          </t>
+                     </div>
+
+                     <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
                          <t t-if="importeIva4 != 0">
                             <span t-esc="'%.2f'%importeIva4Total"></span>
                          </t>
@@ -771,7 +807,7 @@
                          </t>
                      </div>
 
-                     <div style="width:10%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                     <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
                          <t t-if="importeIva4 != 0">
                             <span>4.00</span>
                          </t>
@@ -780,7 +816,7 @@
                          </t>
                      </div>
 
-                     <div style="width:16%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                     <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
                         <t t-if="importeIva4 != 0">
                             <span t-esc="'%.2f'%importeIva4"></span>
                          </t>
@@ -789,7 +825,7 @@
                          </t>
                      </div>
 
-                      <div style="width:10%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                      <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
                         <t t-if="importeRec05 != 0">
                             <span>0.5</span>
                          </t>
@@ -798,7 +834,7 @@
                          </t>
                      </div>
 
-                     <div style="width:16%;border-right:2px solid black;text-align:center;float:left;height:25px;">
+                     <div style="width:9%;border-right:2px solid black;text-align:center;float:left;height:25px;">
                          <t t-if="importeRec05 != 0">
                             <span t-esc="'%.2f'%importeRec05"></span>
                          </t>
@@ -807,7 +843,7 @@
                          </t>
                      </div>
 
-                     <div style="width:16%;text-align:center;float:left;height:25px;">
+                     <div style="width:10%;text-align:center;float:left;height:25px;">
                         <span style="color:white;">Total Factura</span>
                      </div>
                     <!-- fin tercera fila -->
@@ -816,9 +852,9 @@
                     <!--Fin desgloses IVA y RECARAGO -->
 
                     <!-- Portes -->
-                    <div t-if="o.carrier_id" style="clear:both;margin-top:30px;">
-                      <span>Transporte: </span><span t-field="o.carrier_id"/>
-                    </div>
+                    <!--<div t-if="o.carrier_id" style="clear:both;margin-top:30px;">
+                      <span>Transporte: </span><span t-field="o.carrier_id.fixed_price"/>
+                    </div>-->
                     <!-- Fin portes -->
 
                     <!-- Leyenda Factura -->
