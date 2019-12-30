@@ -782,7 +782,7 @@
                     <hr style="height:2px;width:100%;background-color:black;"></hr>
                 </div>
                     <div style="clear:both;">
-                        <p>*Factura no sujerta de IVA en virtud del artículo 25 de la Ley 37/1992, del IVA.</p>
+                        <p>*Factura no sujerta de IVA en virtud del artículo 20 de la Ley 37/1992, del IVA.</p>
                     </div>
 
                 </t>
@@ -925,6 +925,17 @@
                     <!-- Leyenda Factura -->
 
                     <div style="clear:both;">
+                        <div style="display:block;" t-if="o.partner_shipping_id.country_id.name == 'Portugal'" >
+                            <span style="display:block;">Para pagos por transferencia:</span>
+                            <span style="display:block;"> BANCO: BPI</span>
+                            <span style="display:block;">IBAN: PT50 0010 0000 4423 5081 5019 1</span>
+                        </div>
+                        <div style="display:block;" t-if="o.partner_shipping_id.country_id.name != 'Portugal'" >
+                            <span style="display:block;">Para pagos por transferencia:</span>
+                            <span style="display:block;"> BANCO: SANTANDER</span>
+                            <span style="display:block;">IBAN: ES94 0049 2336 4225 1408 4617</span>
+                        </div>
+
                       <span style="display:block;">La posesión de esta Factura no justifica su pago</span>
                       <span style="display:block;" >Las incidencias en transporte (roturas, falta de mercancía, etc.), deberán ser comunicadas antes de 24 horas.</span>
                     </div>
