@@ -29,7 +29,7 @@
 
                                     <li>
                                         <div t-if="company.street" style="display:inline-block">
-                                            C/<span t-field="company.street"/>,
+                                            <span t-field="company.street"/>,
                                         </div>
                                         <div t-if="company.street2" style="display:inline-block">
                                             <span t-field="company.street2"/>

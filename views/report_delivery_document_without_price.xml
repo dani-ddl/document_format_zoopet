@@ -249,7 +249,7 @@
                           </div>
                        </div>
                     <!-- lineas -->
-                        <div style="margin-top:50px;">
+                        <div style="margin-top:50px;font-size:0.8em;">
                             <t t-set="has_serial_number" t-value="o.move_line_ids.mapped('lot_id')"/>
 
                                 <t t-foreach="o.move_line_ids" t-as="move_line">

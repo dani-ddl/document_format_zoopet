@@ -819,45 +819,45 @@
 
                <!-- desglose de Impuestos -->
 
-                     <div  t-if="importeIva21Total != 0" style="width:50%;float:left;">
+                     <div t-if="importeIva21Total != 0" style="width:50%;float:left;">
                            <span>IVA 21% en </span><span t-esc="'%.2f'%importeIva21Total"></span>
                        </div>
-                       <div style="width:50%;float:left;text-align:right;">
+                       <div t-if="importeIva21Total != 0" style="width:50%;float:left;text-align:right;">
                            <span t-esc="'%.2f'%importeIva21"></span>€
                        </div>
 
                        <div  t-if="importeRec52 != 0" style="width:50%;float:left;">
                            <span>R.E. 5.2% en </span><span t-esc="'%.2f'%importeIva21Total"></span>
                        </div>
-                       <div style="width:50%;float:left;text-align:right;">
+                       <div t-if="importeRec52 != 0" style="width:50%;float:left;text-align:right;">
                            <span t-esc="'%.2f'%importeRec52"></span>€
                        </div>
 
                         <div  t-if="importeIva10Total != 0" style="width:50%;float:left;">
                            <span>IVA 10% en </span><span t-esc="'%.2f'%importeIva10Total"></span>
                        </div>
-                       <div style="width:50%;float:left;text-align:right;">
+                       <div  t-if="importeIva10Total != 0" style="width:50%;float:left;text-align:right;">
                            <span t-esc="'%.2f'%importeIva10"></span>€
                        </div>
 
                         <div  t-if="importeRec14 != 0" style="width:50%;float:left;">
                            <span>R.E. 1.4% en </span><span t-esc="'%.2f'%importeIva10Total"></span>
                        </div>
-                       <div style="width:50%;float:left;text-align:right;">
+                       <div t-if="importeRec14 != 0" style="width:50%;float:left;text-align:right;">
                            <span t-esc="'%.2f'%importeRec14"></span>€
                        </div>
 
                     <div  t-if="importeIva4Total != 0" style="width:50%;float:left;">
                            <span>IVA 4% en </span><span t-esc="'%.2f'%importeIva4Total"></span>
                        </div>
-                       <div style="width:50%;float:left;text-align:right;">
+                       <div t-if="importeIva4Total != 0" style="width:50%;float:left;text-align:right;">
                            <span t-esc="'%.2f'%importeIva4"></span>€
                        </div>
 
                         <div  t-if="importeRec05 != 0" style="width:50%;float:left;">
                            <span>R.E. 0.5% en </span><span t-esc="'%.2f'%importeIva4Total"></span>
                        </div>
-                       <div style="width:50%;float:left;text-align:right;">
+                       <div t-if="importeRec05 != 0" style="width:50%;float:left;text-align:right;">
                            <span t-esc="'%.2f'%importeRec05"></span>€
                        </div>
 
