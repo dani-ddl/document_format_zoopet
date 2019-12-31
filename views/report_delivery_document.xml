@@ -827,7 +827,7 @@
                     <t t-if="weight != 0">
                         <div style="clear:both;">
                             <span>Peso total: </span>
-                            <b><span t-esc="weight"></span>KG</b>
+                            <b><span t-esc="'%.4f'%weight"></span>KG</b>
                         </div>
                     </t>
 
