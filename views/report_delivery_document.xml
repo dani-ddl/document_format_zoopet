@@ -347,7 +347,7 @@
 
                 <!-- lineas -->
 
-                    <div style="width:100%;">
+                    <div style="width:110%;margin-top:20px;margin-left:-15px;">
                         <t t-set="has_serial_number" t-value="o.move_line_ids.mapped('lot_id')"/>
                             <t t-set="importeTotal" t-value="0"></t>
                             <t t-foreach="o.move_line_ids" t-as="move_line">
@@ -359,7 +359,7 @@
                                 </div>
                              <!-- Fin codigo -->
                              <!-- Descripcion -->
-                                <div style="width:224px; display:block;float:left;">
+                                <div style="width:280px; display:block;float:left;">
                                     <span t-field="move_line.product_id.name"/>
                                     <p t-if="o.picking_type_code == 'outgoing'">
                                         <span t-field="move_line.product_id.sudo().description_pickingout"/>
