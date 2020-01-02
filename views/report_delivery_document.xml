@@ -291,7 +291,7 @@
                     <!-- Cabecera -->
 
                        <div style="clear:both;font-size:0.9em;width:110%;">
-                          <div style="height:14px; width:122px; display:block; float:left; margin-left:-15px;font-size:1.2em;">
+                          <div style="height:14px; width:122px; display:block; float:left;font-size:1.2em;">
                             <span>Código</span>
                           </div>
                           <div style="height:14px; width:224px; display:block;float:left;font-size:1.2em;">
