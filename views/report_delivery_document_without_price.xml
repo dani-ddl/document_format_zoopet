@@ -233,6 +233,10 @@
           <!-- fin observaciones -->
       <!-- Fin datos documento -->
 
+                    <div class="watermark" style="position:absolute;opacity:0.25;font-size:3em;width:100%;text-align:center;z-index:1000;-webkit-transform: rotate(-37deg);margin-top:300px;">
+                        <p>*NOTA DE ENTREGA*</p>
+                </div>
+
                     <hr style="background-color:white;height:250px;"></hr>
                     <!-- Cabecera -->
 
