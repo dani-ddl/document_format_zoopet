@@ -347,7 +347,7 @@
 
                 <!-- lineas -->
 
-                    <div style="width:110%;margin-top:20px;margin-left:-15px;">
+                    <div style="width:105%;margin-top:20px;margin-left:-5px;">
                         <t t-set="has_serial_number" t-value="o.move_line_ids.mapped('lot_id')"/>
                             <t t-set="importeTotal" t-value="0"></t>
                             <t t-foreach="o.move_line_ids" t-as="move_line">
