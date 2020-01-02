@@ -14,7 +14,8 @@
         'account',
         'sale',
         'web',
-        'stock'
+        'stock',
+        'product'
     ],
     'license': 'AGPL-3',
     'data': [
@@ -23,6 +24,7 @@
         'views/external_layout_clean.xml',
         'views/report_saleorder_document.xml',
         'views/report_invoice_document.xml',
+        'views/report_simple_label.xml',
     ],
     'demo': [],
     'installable': True,
