@@ -294,7 +294,7 @@
                           <div style="height:14px; width:122px; display:block; float:left; margin-left:-15px;font-size:1.2em;">
                             <span>Código</span>
                           </div>
-                          <div style="height:14px; width:230px; display:block;float:left;font-size:1.2em;">
+                          <div style="height:14px; width:240px; display:block;float:left;font-size:1.2em;">
                             <span>Descripción</span>
                           </div>
                           <div style="height:14px; width:55px;  display:block; float:left;font-size:1.2em;text-align:right;">
@@ -359,7 +359,7 @@
                                 </div>
                              <!-- Fin codigo -->
                              <!-- Descripcion -->
-                                <div style="width:230px; display:block;float:left;">
+                                <div style="width:240px; display:block;float:left;">
                                     <span t-field="move_line.product_id.name"/>
                                     <p t-if="o.picking_type_code == 'outgoing'">
                                         <span t-field="move_line.product_id.sudo().description_pickingout"/>
