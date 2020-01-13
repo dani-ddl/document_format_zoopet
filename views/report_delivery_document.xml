@@ -155,10 +155,6 @@
                     <div>
                       <span t-if="o.partner_id.phone">TLF.:</span><span t-if="o.partner_id.phone" t-field="o.partner_id.phone"/>
                     </div>
-                 <!-- CIF/NIF -->
-                    <div>
-                      <span t-if="o.partner_id.vat">NIF/CIF: </span><span  t-if="o.partner_id.vat" t-field="o.partner_id.vat"/>
-                    </div>
                 </div>
             </div>
             <!-- Fin direccion de envio -->
@@ -182,7 +178,13 @@
           <!-- fin datos documento -->
           <!-- observaciones -->
             <div style="width:49%;float:left;margin-left:1%;border:2px solid black;height:51px;margin-top:5px;">
-              <span style="margin-left:2px;"><b>Observaciones:</b></span><span t-field="o.note"/>
+                <t t-set="obser" t-value=""></t>
+                <t t-foreach="o.move_line_ids" t-as="line">
+                    <t t-if="line.move_id.sale_line_id.order_id.note">
+                        <t t-set="obser" t-value="line.move_id.sale_line_id.order_id.note"></t>
+                    </t>
+                </t>
+                <span style="margin-left:2px;"><b>Observaciones:</b></span><span t-esc="obser"></span>
             </div>
           <!-- fin observaciones -->
       <!-- Fin datos documento -->
@@ -290,42 +292,52 @@
 
                     <!-- Cabecera -->
 
-                       <div style="clear:both;font-size:0.9em;width:100%;">
-                          <div style="height:14px; width:9%; display:block; float:left;font-size:1.2em;">
-                            <span>Código</span>
+                       <div style="clear:both;font-size:0.7em;width:100%;">
+                          <div style="height:14px; width:10%; display:block; float:left;font-size:1.2em;">
+                            <span><b>Código</b></span>
                           </div>
-                          <div style="height:14px; width:18%; display:block;float:left;font-size:1.2em;">
-                            <span>Descripción</span>
+                          <div style="height:14px; width:29%; display:block;float:left;font-size:1.2em;">
+                            <span><b>Descripción</b></span>
                           </div>
-                          <div style="height:14px; width:9%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>IVA%</span>
+                          <div style="height:14px; width:7%;  display:block; float:left;font-size:1.2em;text-align:right;">
+                            <span><b>IVA%</b></span>
                           </div>
-                          <div style="height:14px; width:9%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>Unidades</span>
+                          <div style="height:14px; width:5%;  display:block; float:left;font-size:1.2em;text-align:right;">
+                            <span><b>UD</b></span>
                           </div>
                           <div style="height:14px; width:9%;  display:block;float:left;font-size:1.2em;text-align:right;">
-                            <span>Precio/U</span>
+                            <span><b>Precio/U</b></span>
                           </div>
-                          <div style="height:14px; width:9%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>DTO.</span>
+                          <div style="height:14px; width:8%;  display:block; float:left;font-size:1.2em;text-align:right;">
+                            <t t-if="total_discount1 != 0">
+                                <span><b>DP.</b></span>
+                            </t>
                           </div>
-                           <div style="height:14px; width:9%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>DTO2.</span>
+                           <div style="height:14px; width:8%;  display:block; float:left;font-size:1.2em;text-align:right;">
+                            <t t-if="total_discount2 != 0">
+                                <span><b>DC.</b></span>
+                            </t>
                           </div>
-                           <div style="height:14px; width:9%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>DTO3.</span>
+                           <div style="height:14px; width:8%;  display:block; float:left;font-size:1.2em;text-align:right;">
+                            <t t-if="total_discount3 != 0">
+                                <span><b>DPP.</b></span>
+                            </t>
                           </div>
-                           <div style="height:14px; width:9%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>Neto</span>
+                           <div style="height:14px; width:8%;  display:block; float:left;font-size:1.2em;text-align:right;">
+                            <span><b>Neto</b></span>
                           </div>
-                          <div style="height:14px; width:10%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>Importe</span>
+                          <div style="height:14px; width:8%;  display:block; float:left;font-size:1.2em;text-align:right;">
+                            <span><b>Importe</b></span>
                           </div>
                         </div>
+
+
 
                     <div class="watermark" style="position:absolute;opacity:0.25;font-size:3em;width:100%;text-align:center;z-index:1000;-webkit-transform: rotate(-37deg);margin-top:150px;">
                         <p>*NOTA DE ENTREGA*</p>
                 </div>
+
+                <hr style="height:2px;width:110%;background-color:black;margin-left:-15px;margin-top:20px;"></hr>
 
                     <!-- Fin cabecera -->
 
@@ -347,19 +359,21 @@
 
                 <!-- lineas -->
 
-                    <div style="width:100%;margin-top:20px;">
+                    <div style="width:100%;">
+
                         <t t-set="has_serial_number" t-value="o.move_line_ids.mapped('lot_id')"/>
                             <t t-set="importeTotal" t-value="0"></t>
                             <t t-foreach="o.move_line_ids" t-as="move_line">
 
+
+                             <div style="font-size:0.7em;">
                              <!-- codigo -->
-                             <div style="font-size:0.8em;clear:both;margin-top:30px;">
-                                <div style="width:9%; display:block; float:left;">
+                                <div style="width:10%; display:block;clear:both; float:left;height:16px;margin-top:-10px;">
                                   <span t-field="move_line.product_id.default_code"/>
                                 </div>
                              <!-- Fin codigo -->
                              <!-- Descripcion -->
-                                <div style="width:18%; display:block;float:left;">
+                                <div style="width:29%; display:block;float:left;margin-top:-10px;">
                                     <span t-field="move_line.product_id.name"/>
                                     <p t-if="o.picking_type_code == 'outgoing'">
                                         <span t-field="move_line.product_id.sudo().description_pickingout"/>
@@ -371,7 +385,7 @@
                               <!-- Fin descripcion -->
                               <!-- % de IVA -->
 
-                                <div style="width:9%;  display:block; float:left;text-align:right;">
+                                <div style="width:7%;  display:block; float:left;text-align:right;margin-top:-10px;">
                                     <t t-set="IVALin" t-value="0"></t>
                                     <t t-f="move_line.move_id.sale_line_id.tax_id">
                                     <t t-foreach="move_line.move_id.sale_line_id.tax_id" t-as="tax">
@@ -392,7 +406,7 @@
                                     <span t-esc="IVALin"></span>
                                   </t>
                                   <t t-else="">
-                                    <span style="color:white;">aaaa</span>
+                                    <span style="color:white;">a</span>
                                   </t>
 
                                     </t>
@@ -401,13 +415,13 @@
                               <!-- Fin % de IVA -->
 
                               <!-- Cantidad entregada -->
-                                <div style="width:9%;  display:block; float:left;text-align:right">
+                                <div style="width:5%;  display:block; float:left;text-align:right;margin-top:-15px">
                                      <span t-esc="'%.2f'%move_line.move_id.sale_line_id.qty_delivered"/>
                                 </div>
                               <!-- Fin cantidad entregada -->
 
                               <!--Precio / U -->
-                                <div style="width:9%;  display:block;float:left; text-align:right;">
+                                <div style="width:9%;  display:block;float:left; text-align:right;margin-top:-15px">
                                       <t t-if="move_line.move_id.sale_line_id">
                                         <span t-esc="'%.2f'%move_line.move_id.sale_line_id.price_unit"/>€
                                     </t>
@@ -418,40 +432,40 @@
                               <!-- Fin precio / u -->
 
                               <!-- Descuento1 -->
-                                <div t-if="move_line.move_id.sale_line_id.discount != 0.00" style="width:9%;  display:block; float:left;text-align:right;">
+                                <div t-if="move_line.move_id.sale_line_id.discount != 0.00" style="width:8%;display:block; float:left;text-align:right;margin-top:-15px">
                                       <span t-esc="'%.2f'%move_line.move_id.sale_line_id.discount"/>
                                 </div>
-                                <div t-else="" style="width:9%;display:block; float:left;text-align:right;">
-                                     <span style="color:white;">aaa</span>
+                                <div t-else="" style="width:8%;display:block; float:left;text-align:right;margin-top:-15px">
+                                     <span style="color:white;">a</span>
                                 </div>
                               <!-- Fin descuento1 -->
 
                                <!-- Descuento2 -->
-                                <div t-if="move_line.move_id.sale_line_id.discount2 != 0.00" style="width:9%;  display:block; float:left;text-align:right;">
+                                <div t-if="move_line.move_id.sale_line_id.discount2 != 0.00" style="width:8%;  display:block; float:left;text-align:right;margin-top:-15px">
                                       <span t-esc="'%.2f'%move_line.move_id.sale_line_id.discount2"/>
                                 </div>
-                                <div t-else="" style="width:9%;display:block; float:left;text-align:right;">
-                                     <span style="color:white;">aaa</span>
+                                <div t-else="" style="width:8%;display:block; float:left;text-align:right;margin-top:-15px">
+                                     <span style="color:white;">a</span>
                                 </div>
                               <!-- Fin descuento2 -->
 
                                  <!-- Descuento3 -->
-                                <div t-if="move_line.move_id.sale_line_id.discount3 != 0.00" style="width:9%;  display:block; float:left;text-align:right;">
+                                <div t-if="move_line.move_id.sale_line_id.discount3 != 0.00" style="width:8%;  display:block; float:left;text-align:right;margin-top:-15px">
                                       <span t-esc="'%.2f'%move_line.move_id.sale_line_id.discount3"/>
                                 </div>
-                                <div t-else="" style="width:9%;display:block; float:left;text-align:right;">
-                                     <span style="color:white;">aaa</span>
+                                <div t-else="" style="width:8%;display:block; float:left;text-align:right;margin-top:-15px">
+                                     <span style="color:white;">a</span>
                                 </div>
                               <!-- Fin descuento3 -->
 
                               <!-- Precio Neto / u -->
-                                <div style="width:9%;  display:block; float:left;text-align:right;">
+                                <div style="width:8%;  display:block; float:left;text-align:right;margin-top:-15px">
                                      <span t-esc="'%.2f'%move_line.move_id.sale_line_id.price_reduce"/>€
                                 </div>
                               <!-- Fin precio neto / u -->
 
                               <!-- Precio total linea -->
-                                <div style="width:10%;  display:block; float:left;text-align:right;">
+                                <div style="width:8%;  display:block; float:left;text-align:right;margin-top:-15px">
                                     <t t-if="move_line.move_id.sale_line_id.discount">
                                     <t t-set="discount" t-value="move_line.move_id.sale_line_id.price_unit*move_line.move_id.sale_line_id.discount/100"></t>
                                     <t t-set="price_discount" t-value="move_line.move_id.sale_line_id.price_unit - discount"></t>
@@ -640,7 +654,7 @@
                             </t>
                         </div>
 
-                        <hr style="height:2px;width:110%;background-color:black;margin-left:-15px;"></hr>
+                        <hr style="height:2px;width:110%;background-color:black;margin-left:-15px;clear:both;"></hr>
 
                 <!-- Fin productos -->
 
@@ -820,9 +834,9 @@
                 </div>
 
                     <!-- Portes -->
-                    <!--<div t-if="o.carrier_id" style="clear:both;margin-top:30px;">
-                      <span>Transporte: </span><span t-field="o.carrier_id.fixed_price"/>
-                    </div>-->
+                    <div t-if="o.carrier_id" style="clear:both;margin-top:30px;">
+                      <span>Método de Envío: </span><b><span t-field="o.carrier_id.name"/></b>
+                    </div>
                     <!-- Fin portes -->
 
                     <!-- Peso -->

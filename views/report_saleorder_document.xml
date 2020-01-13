@@ -176,10 +176,6 @@
                     <div>
                       <span t-if="doc.partner_shipping_id.phone">TLF.:</span><span t-if="doc.partner_shipping_id.phone" t-field="doc.partner_shipping_id.phone"/>
                     </div>
-                 <!-- CIF/NIF -->
-                    <div>
-                      <span t-if="doc.partner_shipping_id.vat">NIF/CIF: </span><span  t-if="doc.partner_shipping_id.vat" t-field="doc.partner_shipping_id.vat"/>
-                    </div>
                 </div>
             </div>
 
@@ -291,26 +287,32 @@
                           <div style="height:14px; width:10%; display:block; float:left; margin-left:-15px;font-size:1.2em;">
                             <span>Código</span>
                           </div>
-                          <div style="height:14px; width:25%; display:block;float:left;font-size:1.2em;">
+                          <div style="height:14px; width:29%; display:block;float:left;font-size:1.2em;">
                             <span>Descripción</span>
                           </div>
                           <div style="height:14px; width:7%;  display:block; float:left;font-size:1.2em;text-align:right;">
                             <span>IVA</span>
                           </div>
-                          <div style="height:14px; width:9%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>Unidades</span>
+                          <div style="height:14px; width:5%;  display:block; float:left;font-size:1.2em;text-align:right;">
+                            <span>UD</span>
                           </div>
                           <div style="height:14px; width:9%;  display:block;float:left;font-size:1.2em;text-align:right;">
                             <span>Precio/U</span>
                           </div>
                           <div style="height:14px; width:8%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>DTO.</span>
+                            <t t-if="total_discount1 != 0">
+                                <span>DP.</span>
+                            </t>
                           </div>
                           <div style="height:14px; width:8%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>DTO 2.</span>
+                             <t t-if="total_discount2 != 0">
+                                <span>DC.</span>
+                            </t>
                           </div>
                           <div style="height:14px; width:8%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>DTO 3.</span>
+                             <t t-if="total_discount3 != 0">
+                                <span>DPP.</span>
+                            </t>
                           </div>
                            <div style="height:14px; width:8%;  display:block; float:left;font-size:1.2em;text-align:right;">
                             <span>Neto</span>
@@ -377,7 +379,8 @@
 
                        <t t-if="line.product_id">
             <!-- codigo -->
-                             <div style="font-size:0.8em;clear:both;margin-top:10px;">
+                             <div style="font-size:0.9em;clear:both;margin-top:5px;">
+
                                 <div style="width:10%; display:block; float:left; margin-left:-15px;">
                                   <t t-if="line.product_id.default_code">
                                     <span t-field="line.product_id.default_code"/>
@@ -389,7 +392,7 @@
                              <!-- Fin codigo -->
 
                              <!-- Descripcion -->
-                                <div style="width:25%; display:block;float:left;">
+                                <div style="width:29%; display:block;float:left;;font-size:0.8em;">
                                   <t t-if="line.name">
                                     <t t-set="productName" t-value="line.name"></t>
                                     <t t-set="name_num" t-value="productName.find(']') + 1 "></t>
@@ -428,8 +431,8 @@
                               <!-- Fin % de IVA -->
 
                               <!-- Cantidad entregada -->
-                                <div style="width:9%;  display:block; float:left;text-align:right">
-                                     <span t-field="line.product_uom_qty"/>
+                                <div style="width:5%;  display:block; float:left;text-align:right">
+                                     <span t-esc="'%.2f'%line.product_uom_qty"/>
                                 </div>
                               <!-- Fin cantidad entregada -->
 
@@ -758,7 +761,7 @@
                 <div style="width:40%;margin-right:10%;float:left;font-size:0.8em;">
                   <div t-if="total_discount1 != 0">
                        <div style="width:50%;float:left;">
-                           <span>Total descuento 1</span>
+                           <span>Total descuento Producto</span>
                        </div>
                        <div style="width:50%;float:left;text-align:right;">
                            -<span t-esc="'%.2f'%total_discount1"></span>€
@@ -766,7 +769,7 @@
                   </div>
                   <div t-if="total_discount2 != 0">
                        <div style="width:50%;float:left;">
-                           <span>Total descuento 2</span>
+                           <span>Total descuento Cliente</span>
                        </div>
                        <div style="width:50%;float:left;text-align:right;">
                            -<span t-esc="'%.2f'%total_discount2"></span>€
@@ -774,7 +777,7 @@
                   </div>
                   <div t-if="total_discount3 != 0">
                        <div style="width:50%;float:left;">
-                           <span>Total descuento 3</span>
+                           <span>Total descuento PP</span>
                        </div>
                        <div style="width:50%;float:left;text-align:right;">
                            -<span t-esc="'%.2f'%total_discount3"></span>€
@@ -805,7 +808,7 @@
 
               <!-- Fin descuentos aplicados -->
 
-                <div style="width:40%;margin-left:8%;float:left;font-size:0.8em;">
+                <div style="width:40%;margin-left:8%;float:right;font-size:0.8em;">
 
               <!-- Base imponible -->
 
