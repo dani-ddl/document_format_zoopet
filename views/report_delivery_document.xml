@@ -179,9 +179,13 @@
           <!-- observaciones -->
             <div style="width:49%;float:left;margin-left:1%;border:2px solid black;height:51px;margin-top:5px;">
                 <t t-set="obser" t-value=""></t>
+                <t t-set="sale_type" t-value="no_type"></t>
                 <t t-foreach="o.move_line_ids" t-as="line">
                     <t t-if="line.move_id.sale_line_id.order_id.note">
                         <t t-set="obser" t-value="line.move_id.sale_line_id.order_id.note"></t>
+                    </t>
+                    <t t-if="line.move_id.sale_line_id.order_id.type_id">
+                        <t t-set="sale_type" t-value="line.move_id.sale_line_id.order_id.type_id.name"></t>
                     </t>
                 </t>
                 <span style="margin-left:2px;"><b>Observaciones:</b></span><span t-esc="obser"></span>
@@ -842,10 +846,12 @@
                     <!-- Peso -->
 
                     <t t-if="weight != 0">
+                        <t t-if="sale_type != 'Serie C' and sale_type != no_type" >
                         <div style="clear:both;">
                             <span>Peso total: </span>
                             <b><span t-esc="'%.4f'%weight"></span>KG</b>
                         </div>
+                        </t>
                     </t>
 
                     <!-- Fin peso -->
