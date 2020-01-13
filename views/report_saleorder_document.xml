@@ -283,42 +283,42 @@
 
                <!-- fin descuentos -->
 
-                <div style="clear:both;font-size:0.8em;padding-bottom:15px;width:100%;">
+                <div style="clear:both;font-size:0.7em;padding-bottom:15px;width:100%;">
                           <div style="height:14px; width:10%; display:block; float:left; margin-left:-15px;font-size:1.2em;">
-                            <span>Código</span>
+                            <span><b>Código</b></span>
                           </div>
                           <div style="height:14px; width:29%; display:block;float:left;font-size:1.2em;">
-                            <span>Descripción</span>
+                            <span><b>Descripción</b></span>
                           </div>
                           <div style="height:14px; width:7%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>IVA</span>
+                            <span><b>IVA</b></span>
                           </div>
                           <div style="height:14px; width:5%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>UD</span>
+                            <span><b>UD</b></span>
                           </div>
                           <div style="height:14px; width:9%;  display:block;float:left;font-size:1.2em;text-align:right;">
-                            <span>Precio/U</span>
+                            <span><b>Precio/U</b></span>
                           </div>
                           <div style="height:14px; width:8%;  display:block; float:left;font-size:1.2em;text-align:right;">
                             <t t-if="total_discount1 != 0">
-                                <span>DP.</span>
+                                <span><b>DP.</b></span>
                             </t>
                           </div>
                           <div style="height:14px; width:8%;  display:block; float:left;font-size:1.2em;text-align:right;">
                              <t t-if="total_discount2 != 0">
-                                <span>DC.</span>
+                                <span><b>DC.</b></span>
                             </t>
                           </div>
                           <div style="height:14px; width:8%;  display:block; float:left;font-size:1.2em;text-align:right;">
                              <t t-if="total_discount3 != 0">
-                                <span>DPP.</span>
+                                <span><b>DPP.</b></span>
                             </t>
                           </div>
                            <div style="height:14px; width:8%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>Neto</span>
+                            <span><b>Neto</b></span>
                           </div>
                           <div style="height:14px; width:8%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>Importe</span>
+                            <span><b>Importe</b></span>
                           </div>
                         </div>
 

@@ -92,10 +92,6 @@
                     <div>
                       <span t-if="o.partner_shipping_id.phone">TLF.:</span><span t-if="o.partner_shipping_id.phone" t-field="o.partner_shipping_id.phone"/>
                     </div>
-                 <!-- CIF/NIF -->
-                    <div>
-                      <span t-if="o.partner_shipping_id.vat">NIF/CIF: </span><span  t-if="o.partner_shipping_id.vat" t-field="o.partner_shipping_id.vat"/>
-                    </div>
                 </div>
             </div>
 
@@ -202,36 +198,42 @@
 
                     <!-- lineas -->
 
-                <div style="clear:both;font-size:0.9em;padding-bottom:20px;width:100%;">
+                <div style="clear:both;font-size:0.7em;padding-bottom:20px;width:100%;">
                           <div style="height:14px; width:10%; display:block; float:left; margin-left:-15px;font-size:1.2em;">
-                            <span>Código</span>
+                              <span><b>Código</b></span>
                           </div>
-                          <div style="height:14px; width:25%; display:block;float:left;font-size:1.2em;">
-                            <span>Descripción</span>
+                          <div style="height:14px; width:29%; display:block;float:left;font-size:1.2em;">
+                            <span><b>Descripción</b></span>
                           </div>
                           <div style="height:14px; width:7%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>IVA</span>
+                            <span><b>IVA</b></span>
                           </div>
-                          <div style="height:14px; width:9%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>Unidades</span>
+                          <div style="height:14px; width:5%;  display:block; float:left;font-size:1.2em;text-align:right;">
+                            <span><b>UD</b></span>
                           </div>
                           <div style="height:14px; width:9%;  display:block;float:left;font-size:1.2em;text-align:right;">
-                            <span>Precio/U</span>
+                            <span><b>Precio/U</b></span>
                           </div>
                           <div style="height:14px; width:8%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>DTO.</span>
+                            <t t-if="total_discount1 != 0">
+                                <span><b>DP.</b></span>
+                            </t>
                           </div>
                           <div style="height:14px; width:8%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>DTO 2.</span>
+                            <t t-if="total_discount2 != 0">
+                                <span><b>DC.</b></span>
+                            </t>
                           </div>
                             <div style="height:14px; width:8%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>DTO 3.</span>
+                            <t t-if="total_discount3 != 0">
+                                <span><b>DPP.</b></span>
+                            </t>
                           </div>
                            <div style="height:14px; width:8%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>Neto</span>
+                            <span><b>Neto</b></span>
                           </div>
                           <div style="height:14px; width:8%;  display:block; float:left;font-size:1.2em;text-align:right;">
-                            <span>Importe</span>
+                              <span><b>Importe</b></span>
                           </div>
                 </div>
 
@@ -295,7 +297,7 @@
                         <t t-if="line.product_id">
 
                             <!-- codigo -->
-                             <div style="font-size:0.9em;clear:both;font-size:0.8em;">
+                             <div style="font-size:0.7em;clear:both;">
                                 <div style="width:10%; display:block; float:left; margin-left:-15px;">
                                   <t t-if="line.product_id.default_code">
                                     <span t-field="line.product_id.default_code"/>
@@ -307,7 +309,7 @@
                              <!-- Fin codigo -->
 
                              <!-- Descripcion -->
-                                <div style="width:25%; display:block;float:left;">
+                                <div style="width:29%; display:block;float:left;">
                                    <t t-if="line.name">
                                     <t t-set="productName" t-value="line.name"></t>
                                     <t t-set="name_num" t-value="productName.find(']') + 1 "></t>
@@ -343,8 +345,8 @@
                               <!-- Fin % de IVA -->
 
                               <!-- Cantidad entregada -->
-                                <div style="width:9%;  display:block; float:left;text-align:right">
-                                     <span t-field="line.quantity"/>
+                                <div style="width:5%;  display:block; float:left;text-align:right">
+                                     <span t-esc="'%.2f'%line.quantity"/>
                                 </div>
                               <!-- Fin cantidad entregada -->
 
@@ -400,13 +402,13 @@
                                 <div style="width:8%;  display:block; float:left;text-align:right;">
                                     <t t-set="neto_linea" t-value="line.price_unit"></t>
                                     <t t-if="line.discount != 0.00">
-                                        <t t-set="neto_linea" t-value="line.price_unit - (line.price_unit *line.discount /100)"></t>
+                                        <t t-set="neto_linea" t-value="neto_linea - (neto_linea *line.discount /100)"></t>
                                     </t>
                                      <t t-if="line.discount2 != 0.00">
-                                          <t t-set="neto_linea" t-value="line.price_unit - (line.price_unit *line.discount2 /100)"></t>
+                                          <t t-set="neto_linea" t-value="neto_linea - (neto_linea *line.discount2 /100)"></t>
                                      </t>
                                     <t t-if="line.discount3 != 0.00">
-                                          <t t-set="neto_linea" t-value="line.price_unit - (line.price_unit *line.discount3 /100)"></t>
+                                          <t t-set="neto_linea" t-value="neto_linea - (neto_linea *line.discount3 /100)"></t>
                                      </t>
 
                                      <span t-esc="round(neto_linea,2)"/>€
@@ -542,7 +544,7 @@
                                     <!-- Unidades -->
                                         <td class="d-none"><span t-field="line.origin"/></td>
                                         <td class="text-right">
-                                           <span t-field="line.quantity"/>
+                                           <span t-esc="'%.2f'%line.quantity"/>
                                             <span t-field="line.uom_id" groups="uom.group_uom"/>
                                         </td>
                                     <!-- Fin Unidades -->
