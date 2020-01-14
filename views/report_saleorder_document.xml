@@ -509,6 +509,7 @@
 
                     <t t-foreach="line.tax_id" t-as="tax">
                   <t t-set="tax_name" t-value="tax.name"></t>
+                  <t t-set="tax_name" t-value="tax.name"></t>
                   <t t-set="isIVA" t-value="tax_name.find('IVA')"></t>
 
                   <!-- acumulacion de las cantidad de cada iva ventas -->
