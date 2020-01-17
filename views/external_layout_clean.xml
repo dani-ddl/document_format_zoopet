@@ -99,13 +99,17 @@
                     <t t-if="isSale">
                         <div style="float:left;width:20%;text-align:center;margin-top:20px;-webkit-transform: rotate(-37deg);">
                             <div>
-                                <t t-if="isSale == 'sale'">
-                                    <b><span style="font-size:1.1em;">*PEDIDO*</span></b>
+                                <t t-if="isDep == 'Depósito'">
+                                    <b><span style="font-size:1.1em;">*DEPÓSITO*</span></b>
                                 </t>
-                                <t t-if="isSale == 'draft'">
-                                    <b><span style="font-size:0.9em;">*PRESUPUESTO*</span></b>
+                                <t t-else="">
+                                     <t t-if="isSale == 'sale'">
+                                        <b><span style="font-size:1.1em;">*PEDIDO*</span></b>
+                                    </t>
+                                    <t t-if="isSale == 'draft'">
+                                        <b><span style="font-size:0.9em;">*PRESUPUESTO*</span></b>
+                                    </t>
                                 </t>
-
                             </div>
                         </div>
                     </t>

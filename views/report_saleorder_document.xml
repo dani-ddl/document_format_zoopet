@@ -48,6 +48,7 @@
            <xpath expr="//div[@class='page']" position="replace">
 
                <t t-set="isSale" t-value="doc.state"></t>
+               <t t-set="isDep" t-value="doc.type_id.name"></t>
 
                <div class="oe_structure"/>
         <div style="display:none;">
@@ -188,8 +189,14 @@
             <div style="width:49%;clear:both;float:left;margin-right:1%;margin-top:5px;font-size:0.9em;margin-bottom:50px;">
               <div style="width:50%;float:left;border:2px solid black;height:25px;">
                 <span style="margin-left:2px;"><b>
-                  <span t-if="doc.state not in ['draft','sent']">Pedido: </span>
-                  <span t-if="doc.state in ['draft','sent']">Presupuesto: </span>
+                    <t t-if="doc.type_id.name == 'Depósito'">
+                        <span>Depósito: </span>
+                    </t>
+                    <t t-else="">
+                        <span t-if="doc.state not in ['draft','sent']">Pedido: </span>
+                        <span t-if="doc.state in ['draft','sent']">Presupuesto: </span>
+                    </t>
+
                   </b></span>
                 <span t-field="doc.name"/>
               </div>
@@ -201,7 +208,7 @@
                 <span t-if="doc.partner_id.parent_id" t-field="doc.partner_id.parent_id.ref"/>
                 <span t-if=" not doc.partner_id.parent_id" t-field="doc.partner_id.ref"/>
               </div>
-              <div style="width:50%;float:left;border-bottom:2px solid black;border-right:2px solid black;height:25px;">
+              <div style="width:50%;float:left;border-bottom:2px solid black;border-right:2px solid black;height:25px;color:white;">
                <span style="margin-left:2px;"><b>Pedido:</b></span><span t-field="doc.origin"/>
               </div>
             </div>

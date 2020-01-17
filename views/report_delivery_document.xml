@@ -852,14 +852,10 @@
                     <!-- Peso -->
 
                     <t t-if="weight != 0">
-                        <t t-if="sale_type != 'Serie C' and sale_type != no_type" >
                         <div style="clear:both;">
-                            <span>Peso total: </span>
-                            <b><span t-esc="'%.4f'%weight"></span>KG</b>
+                            <b><span t-esc="'%.4f'%weight"></span></b>
                         </div>
                         </t>
-                    </t>
-
                     <!-- Fin peso -->
 
                     <!-- Leyenda Factura -->
