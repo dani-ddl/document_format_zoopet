@@ -313,7 +313,7 @@
                                    <t t-if="line.name">
                                     <t t-set="productName" t-value="line.name"></t>
                                     <t t-set="name_num" t-value="productName.find(']') + 1 "></t>
-                                   <t t-set="name" t-value="productName[name_num:]"></t>
+                                    <t t-set="name" t-value="productName[name_num:]"></t>
                                     <span t-esc="name"/>
                                   </t>
                                    <t t-else="">
@@ -666,6 +666,7 @@
                <t t-set="total_discount1" t-value="0"></t>
                <t t-set="total_discount2" t-value="0"></t>
                <t t-set="total_discount3" t-value="0"></t>
+               <t t-set="delivery" t-value="0"></t>
                <t t-foreach="o.invoice_line_ids" t-as="line">
                    <t t-set="line_discount1" t-value="0"></t>
                    <t t-set="line_discount2" t-value="0"></t>
@@ -845,7 +846,7 @@
 
               <!-- Fin descuentos aplicados -->
 
-                <div style="width:40%;margin-left:8%;float:left;font-size:0.8em;">
+                <div style="width:40%;margin-left:8%;float:right;font-size:0.8em;">
 
               <!-- Base imponible -->
 
@@ -919,11 +920,10 @@
                 </t>
 
                     <!-- Metodo de pago -->
-                     <p t-if="o.payment_term_id" name="payment_term">
+                     <p t-if="o.payment_term_id" name="payment_term" style="clear:both;">
                         <span t-field="o.payment_term_id.note"/>
                     </p>
                     <!-- Fin metodo de pago -->
-
                     <!-- Leyenda Factura -->
 
                     <div style="clear:both;">
