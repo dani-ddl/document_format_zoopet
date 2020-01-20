@@ -174,9 +174,16 @@
               <div style="width:50%;float:left;border-bottom:2px solid black;border-right:2px solid black;border-top:2px solid black;height:25px;">
                <span style="margin-left:2px;"><b>Fecha:</b></span><span t-field="o.date_done" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/>
               </div>
-              <div style="width:50%;float:left;border-bottom:2px solid black;border-left:2px solid black;border-right:2px solid black;color:white;height:25px;">
-                <span style="margin-left:2px;"><b>Cliente:</b></span><span/>
-              </div>
+              <t t-if="o.partner_id.ref">
+                  <div style="width:50%;float:left;border-bottom:2px solid black;border-left:2px solid black;border-right:2px solid black;height:25px;">
+                      <span style="margin-left:2px;"><b>Cliente:</b></span><span t-field="o.partner_id.ref"></span>
+                  </div>
+              </t>
+              <t t-else="">
+                  <div style="width:50%;float:left;border-bottom:2px solid black;border-left:2px solid black;border-right:2px solid black;color:white;height:25px;">
+                      <span style="margin-left:2px;"><b>Cliente:</b></span>
+                  </div>
+              </t>
               <div style="width:50%;float:left;border-bottom:2px solid black;border-right:2px solid black;height:25px;">
                <span style="margin-left:2px;"><b>Pedido:</b></span><span t-field="o.origin"/>
               </div>
