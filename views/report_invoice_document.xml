@@ -920,9 +920,13 @@
                 </t>
 
                     <!-- Metodo de pago -->
-                     <p t-if="o.payment_term_id" name="payment_term" style="clear:both;">
+                     <!--<p t-if="o.payment_term_id" name="payment_term" style="clear:both;">
                         <span t-field="o.payment_term_id.note"/>
-                    </p>
+                    </p> -->
+
+                <t t-if="o.payment_term_id">
+                    <t t-set="plazos" t-value="o.payment_term_id.name"></t>
+                </t>
                     <!-- Fin metodo de pago -->
                     <!-- Leyenda Factura -->
 
@@ -939,7 +943,7 @@
                         </div>
 
                       <span style="display:block;">La posesión de esta Factura no justifica su pago</span>
-                      <span style="display:block;" >Las incidencias en transporte (roturas, falta de mercancía, etc.), deberán ser comunicadas antes de 24 horas.</span>
+                      <!--<span style="display:block;" >Las incidencias en transporte (roturas, falta de mercancía, etc.), deberán ser comunicadas antes de 24 horas.</span>-->
                     </div>
 
                     <!-- Fin leyenda Factura -->

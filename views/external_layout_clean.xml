@@ -146,7 +146,36 @@
 
             <xpath expr="//div[@class='row mt8']" position="replace">
 
-                <div>
+                <!-- Portes -->
+
+                   <div t-if="carrier_delivery" style="clear:both;width:33%;float:left;clear:both;">
+                     <span>Método de Envío: </span><b><span t-esc="carrier_delivery"/></b>
+                    </div>
+                    <!-- Fin portes -->
+
+                      <!-- Plazos de pago -->
+                    <div t-if="plazos" style="width:33%;float:left;">
+                      <span>Plazos de Pago: </span><b><span t-esc="plazos"/></b>
+                    </div>
+
+                <!-- Peso -->
+
+                    <t t-if="weight">
+                        <t t-if="weight != 0">
+                            <div style="width:33%;float:left">
+                                <b><span t-esc="'%.4f'%weight"></span></b>
+                            </div>
+                        </t>
+                    </t>
+                    <!-- Fin peso -->
+
+                    <!-- Fin plazos pago -->
+
+                 <div>
+                      <span style="display:block;clear:both;" >Las incidencias en transporte (roturas, falta de mercancía, etc.), deberán ser comunicadas antes de 24 horas.</span>
+                    </div>
+
+                <div style="clear:both;">
                     <span style="font-weight:bolder;font-size:0.9em;">Inscrita en el Reg. Mercantil de Huelva, Tomo 716,
                         Libro 0, Folio 192, Hoja H-12333, Inscrip. 1ª
                     </span>

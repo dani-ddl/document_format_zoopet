@@ -902,12 +902,18 @@
                     <p>Este presupuesto tiene una validez de 30 días.</p>
               </div>
 
-               <div style="margin-top:10px;text-align:right;clear:both;" t-if="doc.payment_term_id">
+               <!--<div style="margin-top:10px;text-align:right;clear:both;" t-if="doc.payment_term_id">
                     <span>Plazos de Pago: </span><span t-field="doc.payment_term_id"/>
-               </div>
+               </div>-->
 
 
         </div>
+        <!-- plazos de pago -->
+        <t t-if="doc.payment_term_id.name">
+            <t t-set="plazos" t-value="doc.payment_term_id.name"></t>
+        </t>
+
+               <!-- Fin plazos de pago-->
 
         <!--<div t-if="doc.note" style="border:2px solid black;clear:both;margin-bottom:10px;">
             <p style="text-align:center;">Observaciones:</p>
