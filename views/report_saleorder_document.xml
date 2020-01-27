@@ -49,6 +49,7 @@
 
                <t t-set="isSale" t-value="doc.state"></t>
                <t t-set="isDep" t-value="doc.type_id.name"></t>
+               <t t-set="carrier_delivery" t-value="hola"></t>
 
                <div class="oe_structure"/>
         <div style="display:none;">
@@ -352,12 +353,21 @@
                 <t t-set="importeIva4Total" t-value="0"></t>
                 <t t-set="importeRec05Total" t-value="0"></t>
 
+                <t t-set="weight" t-value="0"></t>
+
                <!-- fin ivas -->
 
 
                <!-- Fin variables -->
 
                     <t t-foreach="doc.order_line" t-as="line">
+
+                         <!-- calculo peso -->
+                         <t t-if="line.product_id.weight">
+                              <t t-set="weight" t-value="weight + line.product_id.weight * line.product_uom_qty"></t>
+                         </t>
+
+                        <!-- fin calculo peso -->
                       <t t-set="productName" t-value="line.product_id.name"></t>
 
                         <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>

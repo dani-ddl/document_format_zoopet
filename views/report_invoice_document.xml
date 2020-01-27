@@ -259,11 +259,21 @@
                     <t t-set="importeIva4Total" t-value="0"></t>
                     <t t-set="importeRec05Total" t-value="0"></t>
 
+
+                <t t-set="weight" t-value="0"></t>
                    <!-- fin ivas -->
 
                <!-- Fin variables -->
 
                     <t t-foreach="o.invoice_line_ids" t-as="line">
+
+                        <!-- calculo peso -->
+                         <t t-if="line.product_id.weight">
+                              <t t-set="weight" t-value="weight + line.product_id.weight * line.quantity"></t>
+                         </t>
+
+                        <!-- fin calculo peso -->
+
                       <t t-set="productName" t-value="line.product_id.name"></t>
 
 
@@ -930,7 +940,7 @@
                     <!-- Fin metodo de pago -->
                     <!-- Leyenda Factura -->
 
-                    <div style="clear:both;">
+                  <!--  <div style="clear:both;">
                         <div style="display:block;" t-if="o.partner_shipping_id.country_id.name == 'Portugal'" >
                             <span style="display:block;">Para pagos por transferencia:</span>
                             <span style="display:block;"> BANCO: BPI</span>
@@ -942,9 +952,9 @@
                             <span style="display:block;">IBAN: ES94 0049 2336 4225 1408 4617</span>
                         </div>
 
-                      <span style="display:block;">La posesión de esta Factura no justifica su pago</span>
+                      <span style="display:block;">La posesión de esta Factura no justifica su pago</span>-->
                       <!--<span style="display:block;" >Las incidencias en transporte (roturas, falta de mercancía, etc.), deberán ser comunicadas antes de 24 horas.</span>-->
-                    </div>
+                   <!-- </div>-->
 
                     <!-- Fin leyenda Factura -->
 

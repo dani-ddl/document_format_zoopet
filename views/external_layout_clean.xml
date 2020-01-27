@@ -146,36 +146,89 @@
 
             <xpath expr="//div[@class='row mt8']" position="replace">
 
-                <!-- Portes -->
+                         <!-- leyenda Factura -->
 
-                   <div t-if="carrier_delivery" style="clear:both;width:33%;float:left;clear:both;">
-                     <span>Método de Envío: </span><b><span t-esc="carrier_delivery"/></b>
+                 <t t-if="isInvoice">
+                    <div style="clear:both;">
+                        <div style="display:block;" t-if="o.partner_shipping_id.country_id.name == 'Portugal'" >
+                            <span>Para pagos por transferencia:</span>
+                            <span> BANCO: BPI</span>
+                            <span>IBAN: PT50 0010 0000 4423 5081 5019 1</span>
+                        </div>
+                        <div style="display:block;" t-if="o.partner_shipping_id.country_id.name != 'Portugal'" >
+                            <span>Para pagos por transferencia:</span>
+                            <span> BANCO: SANTANDER</span>
+                            <span>IBAN: ES94 0049 2336 4225 1408 4617</span>
+                        </div>
+
+
+                      <!--<span style="display:block;" >Las incidencias en transporte (roturas, falta de mercancía, etc.), deberán ser comunicadas antes de 24 horas.</span>-->
                     </div>
-                    <!-- Fin portes -->
+                </t>
 
-                      <!-- Plazos de pago -->
-                    <div t-if="plazos" style="width:33%;float:left;">
-                      <span>Plazos de Pago: </span><b><span t-esc="plazos"/></b>
-                    </div>
+                 <hr style="height:2px;width:100%;background-color:black;margin-top:-3px;"></hr>
 
-                <!-- Peso -->
+                         <!-- Fin leyenda Factura -->
+
+                 <!-- Peso -->
 
                     <t t-if="weight">
                         <t t-if="weight != 0">
-                            <div style="width:33%;float:left">
+                            <div style="width:33%;float:left;clear:both;margin-top:-3px;">
                                 <b><span t-esc="'%.4f'%weight"></span></b>
                             </div>
                         </t>
+                        <t t-else="">
+                            <div style="width:33%;float:left;clear:both;color:white;margin-top:-3px">
+                                <b><span>aa</span></b>
+                            </div>
+                        </t>
                     </t>
+                    <t t-else="">
+                            <div style="width:33%;float:left;clear:both;color:white;margin-top:-3px">
+                                <b><span>aa</span></b>
+                            </div>
+                        </t>
                     <!-- Fin peso -->
 
-                    <!-- Fin plazos pago -->
+                <!-- Portes -->
+                <t t-if="isSale">
+                    <t t-set="carrier_delivery" t-value="doc.carrier_id.name"></t>
+                </t>
+                    <t t-if="carrier_delivery">
+                   <div style="width:33%;float:left;margin-top:-3px;">
+                     <span>Método de Envío: </span><b><span t-esc="carrier_delivery"/></b>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div style="width:33%;float:left;color:white;margin-top:-3px;">
+                     <span>Método de Envío: </span>
+                    </div>
+                </t>
+                    <!-- Fin portes -->
+
+                      <!-- Plazos de pago -->
+                <t t-if="plazos">
+                    <div t-if="plazos" style="width:33%;float:left;margin-top:-3px;">
+                      <span>Plazos de Pago: </span><b><span t-esc="plazos"/></b>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div t-if="plazos" style="width:33%;float:left;color:white;margin-top:-3px">
+                      <span>Plazos de Pago: </span>
+                    </div>
+                </t>
+                <!-- Fin plazos pago -->
 
                  <div>
-                      <span style="display:block;clear:both;" >Las incidencias en transporte (roturas, falta de mercancía, etc.), deberán ser comunicadas antes de 24 horas.</span>
-                    </div>
 
-                <div style="clear:both;">
+                      <span style="display:block;clear:both;" >Las incidencias en transporte (roturas, falta de mercancía, etc.), deberán ser comunicadas antes de 24 horas.</span>
+                     <span style="display:block;clear:both;text-align:center;">La posesión de esta Factura no justifica su pago</span>
+                 </div>
+
+                <hr style="height:2px;width:100%;background-color:black;margin-top:-3px;clear:both;"></hr>
+
+                <div style="margin-top:-15px;">
                     <span style="font-weight:bolder;font-size:0.9em;">Inscrita en el Reg. Mercantil de Huelva, Tomo 716,
                         Libro 0, Folio 192, Hoja H-12333, Inscrip. 1ª
                     </span>
